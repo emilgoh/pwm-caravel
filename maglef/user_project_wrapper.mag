@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1698936975
+timestamp 1698953746
 << obsli1 >>
 rect 4104 5159 61880 600329
 << obsm1 >>
@@ -817,7 +817,8 @@ rect -3926 -2854 -3306 706790
 rect -2966 -1894 -2346 705830
 rect -2006 -934 -1386 704870
 rect 1794 -7654 2414 711590
-rect 5514 -7654 6134 711590
+rect 5514 558625 6134 711590
+rect 5514 -7654 6134 319815
 rect 9234 -7654 9854 711590
 rect 12954 -7654 13574 711590
 rect 16674 -7654 17294 711590
@@ -957,8 +958,11 @@ rect 591070 -6694 591690 710630
 rect 592030 -7654 592650 711590
 << obsm4 >>
 rect 59 5128 1714 684317
-rect 2494 5128 5434 684317
-rect 6214 5128 9154 684317
+rect 2494 558545 5434 684317
+rect 6214 558545 9154 684317
+rect 2494 319895 9154 558545
+rect 2494 5128 5434 319895
+rect 6214 5128 9154 319895
 rect 9934 5128 12874 684317
 rect 13654 5128 16594 684317
 rect 17374 5128 20314 684317
@@ -2692,7 +2696,9 @@ rlabel metal5 s -2966 705210 586890 705830 6 vssd1
 port 538 nsew ground bidirectional
 rlabel metal4 s 586270 -1894 586890 705830 6 vssd1
 port 538 nsew ground bidirectional
-rlabel metal4 s 5514 -7654 6134 711590 6 vssd1
+rlabel metal4 s 5514 -7654 6134 319815 6 vssd1
+port 538 nsew ground bidirectional
+rlabel metal4 s 5514 558625 6134 711590 6 vssd1
 port 538 nsew ground bidirectional
 rlabel metal4 s 41514 -7654 42134 711590 6 vssd1
 port 538 nsew ground bidirectional
@@ -3062,8 +3068,8 @@ port 645 nsew signal input
 string FIXED_BBOX 0 0 584000 704000
 string LEFclass BLOCK
 string LEFview TRUE
-string GDS_END 11200912
-string GDS_FILE /home/emilgoh/pwm-caravel/openlane/user_project_wrapper/runs/23_11_02_22_54/results/signoff/user_project_wrapper.magic.gds
-string GDS_START 10153984
+string GDS_END 11189350
+string GDS_FILE /home/emilgoh/pwm-caravel/openlane/user_project_wrapper/runs/23_11_03_03_34/results/signoff/user_project_wrapper.magic.gds
+string GDS_START 10145224
 << end >>
 

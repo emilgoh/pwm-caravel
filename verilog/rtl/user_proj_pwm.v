@@ -72,11 +72,8 @@ module user_proj_pwm(
         .pwm3_comp_out(pwm3_comp_out)
     );
     
-    // Input
-    assign io_oeb[8:0] = 9'd1;
-
     // Output
-    assign io_out[8:0] = 0;
+    assign io_out[8:0] = 9'd0;
     assign io_out[9] = pwm1_out;
     assign io_out[10] = pwm1_comp_out;
     assign io_out[11] = pwm2_out;
@@ -84,7 +81,8 @@ module user_proj_pwm(
     assign io_out[13] = pwm3_out;
     assign io_out[14] = pwm3_comp_out;
 
-    assign io_oeb[14:9] = 6'd0;
+    assign io_oeb[14:0] = 15'd0;
+
 
 endmodule
 

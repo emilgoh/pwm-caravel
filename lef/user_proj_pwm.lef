@@ -527,6 +527,8 @@ MACRO user_proj_pwm
         RECT 3.990 33.680 253.030 98.920 ;
         RECT 4.400 32.280 253.030 33.680 ;
         RECT 3.990 10.715 253.030 32.280 ;
+      LAYER met4 ;
+        RECT 9.495 1594.775 9.825 2767.425 ;
   END
 END user_proj_pwm
 END LIBRARY
