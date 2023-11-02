@@ -5,11 +5,10 @@
         "dir::../../verilog/rtl/defines.v",
         "dir::../../verilog/rtl/user_proj_pwm.v",
         "dir::../../verilog/rtl/pwm.v"
-
     ],
     "CLOCK_PERIOD": 25,
     "CLOCK_PORT": "wb_clk_i",
-    "CLOCK_NET": "counter.clk",
+    "CLOCK_NET": "pwm.clk",
     "FP_SIZING": "absolute",
     "DIE_AREA": "0 0 200 3000",
     "FP_PIN_ORDER_CFG": "dir::pin_order.cfg",

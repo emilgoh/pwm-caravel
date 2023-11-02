@@ -92,10 +92,9 @@ user_proj_pwm mprj (
     .wb_rst_i(wb_rst_i),
 
     // IO Pads
-
     .io_in (io_in[37:23]),
     .io_out(io_out[37:23]),
-    .io_oeb(io_oeb[37:23]),
+    .io_oeb(io_oeb[37:23])
 );
 
 endmodule	// user_project_wrapper

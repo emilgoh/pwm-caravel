@@ -1,4 +1,4 @@
-module pwm(
+module ThreePhasePWM(
     input wire clk,
     input wire rst,
     input wire en,  // Added enable input
@@ -14,7 +14,7 @@ module pwm(
     wire [7:0] corrected_duty_cycle;
     wire cmp1_out, cmp2_out;
     wire latch1_q, latch2_q;
-    wire [7:0] count1, count2, count3;
+    wire [7:0] count1, count2;
 
     wire pwm1_raw, pwm2_raw, pwm3_raw;
 
@@ -22,21 +22,21 @@ module pwm(
     // Dead Time Generation for each PWM signal
     DeadTimeGenerator dtg1(
         .clk(clk),
-        .pwm_in(PWM1.pwm_out),
+        .pwm_in(pwm1_raw),
         .pwm_out(pwm1_out),  // Connect to ThreePhasePWM module's output ports
         .comp_pwm_out(pwm1_comp_out)
     );
 
     DeadTimeGenerator dtg2(
         .clk(clk),
-        .pwm_in(PWM2.pwm_out),
+        .pwm_in(pwm2_raw),
         .pwm_out(pwm2_out),  // Connect to ThreePhasePWM module's output ports
         .comp_pwm_out(pwm2_comp_out)
     );
 
     DeadTimeGenerator dtg3(
         .clk(clk),
-        .pwm_in(PWM3.pwm_out),
+        .pwm_in(pwm3_raw),
         .pwm_out(pwm3_out),  // Connect to ThreePhasePWM module's output ports
         .comp_pwm_out(pwm3_comp_out)
     );
@@ -52,7 +52,8 @@ module pwm(
         .rst(rst),
         .en(en),  // Connected enable signal
         .duty_cycle(corrected_duty_cycle),  // Updated to use corrected_duty_cycle
-        .pwm_out(pwm1_raw)
+        .pwm_out(pwm1_raw),  // Updated to match PWM module definition
+        .count(count1)  // Connected count output to ThreePhasePWM module's count1 wire
     );
     
     PWM PWM2(
@@ -60,7 +61,8 @@ module pwm(
         .rst(rst),
         .en(latch1_q & en),  // Updated enable condition
         .duty_cycle(corrected_duty_cycle),  // Updated to use corrected_duty_cycle
-        .pwm_out(pwm2_raw)
+        .pwm_out(pwm2_raw),  // Updated to match PWM module definition
+        .count(count2)  // Connected count output to ThreePhasePWM module's count2 wire
     );
     
     PWM PWM3(
@@ -68,13 +70,8 @@ module pwm(
         .rst(rst),
         .en(latch2_q & en),  // Updated enable condition
         .duty_cycle(corrected_duty_cycle),  // Updated to use corrected_duty_cycle        
-        .pwm_out(pwm3_raw)
+        .pwm_out(pwm3_raw)  // Updated to match PWM module definition
     );
-
-    // Connect counter outputs
-    assign count1 = PWM1.count;
-    assign count2 = PWM2.count;
-    assign count3 = PWM3.count;
 
     // Comparator Modules
     OneThirdComparator cmp1(
@@ -146,16 +143,17 @@ module PWM(
     input wire rst,
     input wire en,  // Added enable input
     input wire [7:0] duty_cycle,
-    output wire pwm_out
+    output wire pwm_out,
+    output wire [7:0] count  // Added count output
 );
+
     wire cmp_out;
-    wire [7:0] count;
     
     UpCounter u1(
         .clk(clk),
         .rst(rst),
         .en(en),  // Connected enable signal
-        .count(count)
+        .count(count)  // Connected count output to PWM module's count output
     );
     
     Comparator c1(

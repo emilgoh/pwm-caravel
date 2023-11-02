@@ -35,9 +35,7 @@
  *-------------------------------------------------------------
  */
 
-module user_proj_pwm #(
-    parameter BITS = 16
-)(
+module user_proj_pwm(
 `ifdef USE_POWER_PINS
     inout vccd1,	// User area 1 1.8V supply
     inout vssd1,	// User area 1 digital ground
@@ -50,24 +48,22 @@ module user_proj_pwm #(
     // IOs
     input  [14:0] io_in,
     output [14:0] io_out,
-    output [14:0] io_oeb,
+    output [14:0] io_oeb
 );
 
-    // Input
-    wire en;
-    wire [7:0] duty_cycle;
-
     //Output
-    wire pwm1_out, pwm1_comp_out;
-    wire pwm2_out, pwm2_comp_out;
-    wire pwm3_out, pwm3_comp_out;
+    wire pwm1_out;
+    wire pwm1_comp_out;
+    wire pwm2_out;
+    wire pwm2_comp_out;
+    wire pwm3_out;
+    wire pwm3_comp_out;
 
-    pwm pwm(
+    ThreePhasePWM pwm(
         .clk(wb_clk_i),
         .rst(wb_rst_i),
-        .en(en),
-        .duty_cycle(duty_cycle),
-
+        .en(io_in[0]),
+        .duty_cycle(io_in[8:1]),
         .pwm1_out(pwm1_out),
         .pwm1_comp_out(pwm1_comp_out),
         .pwm2_out(pwm2_out),
@@ -77,18 +73,16 @@ module user_proj_pwm #(
     );
     
     // Input
-    assign io_in[0] = en;
-    assign io_in[8:0] = duty_cycle;
-    
     assign io_oeb[8:0] = 9'd1;
 
     // Output
+    assign io_out[8:0] = 0;
     assign io_out[9] = pwm1_out;
     assign io_out[10] = pwm1_comp_out;
     assign io_out[11] = pwm2_out;
     assign io_out[12] = pwm2_comp_out;
     assign io_out[13] = pwm3_out;
-    assign io_out[14] = pwm4_comp_out;
+    assign io_out[14] = pwm3_comp_out;
 
     assign io_oeb[14:9] = 6'd0;
 
