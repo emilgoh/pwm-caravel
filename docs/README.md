@@ -89,26 +89,27 @@ When the same error persists even after prompting the error message, the user co
 >
 
 If errors persist, the user can prompt the GPT with a sample code. An example will be:
-> This is an example code of an SR latch. Can you code according to this structure and logic?  
->>module SR_latch(  
->>input en, rst, S, R,  
->>output reg Q  
->>);  
->>   
->> always@(*) begin    
->> &nbsp;if(rst) Q<= 1'b0;  
->> &nbsp;else if(en) begin  
->> &nbsp;&nbsp;case({S,R})  
->> &nbsp;&nbsp;&nbsp;2'b00 : Q<= Q;  
->> &nbsp;&nbsp;&nbsp;2'b01 : Q<= 1'b0;  
->> &nbsp;&nbsp;&nbsp;2'b10 : Q<= 1'b1;  
->> &nbsp;&nbsp;&nbsp;default : Q<=2'bxx;  
->> &nbsp;&nbsp;endcase  
->> &nbsp;&nbsp;end  
->> &nbsp;end  
->>   
->> endmodule  
->>
+> This is an example code of an SR latch. Can you code according to this structure and logic?
+
+```verilog
+module SR_latch(  
+    input en, rst, S, R,  
+    output reg Q  
+);  
+   
+   always@(*) begin    
+        if(rst) Q<= 1'b0;  
+        else if(en) begin  
+            case({S,R})  
+                2'b00 : Q<= Q;  
+                2'b01 : Q<= 1'b0;  
+                2'b10 : Q<= 1'b1;  
+                default : Q<=2'bxx;  
+            endcase  
+        end
+    end  
+endmodule  
+```
 
 ChatGPT-4 with web browsing feature was used to design the three-phase PWM. This LLM was selected as it is known to be the best code generation model before fine-tuning. The web browsing feature was activated such that ChatGPT can search the web if it encounters unfamiliar prompts.
 
@@ -131,6 +132,8 @@ The waveform changes when the duty cycle is adjusted.
 ![Getting Started](images/wave_75.png)
 
 The three-phase PWM with dead time is working as expected.
+
+The VCD file can also be found here: [Output Waveform](output.vcd) .
 
 ## Reflection and Acknowledgement
 Despite coming from an electrical engineering background, this is the first time I went through the entire IC design RTL to GDS (and maybe to chip) flow. It has been a refreshing and exciting experience to be a small part of this movement to democratise IC design by submitting a simple design for the AI-generated Open-Source Silicon Design Challenge.
