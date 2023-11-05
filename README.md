@@ -62,7 +62,7 @@ The three-phase PWM design can be broken down into the following components:
 
 ## LLM Conversational Flowchart
 The conversational flow used is inspired by ChipChat and AI by AI.
-![LLM Conversation](./docs/images/LLMConversationalFlow.png)
+![LLM Conversation](docs/images/LLMConversationalFlow.png)
 
 The flowchart is designed such that the user will always be in the conversation loop until the design is satisfied. Apart from the error loop, there is also an improvement loop and thus, the user will only have to use one single GPT chat session to design their desired circuit.
 
@@ -123,17 +123,17 @@ Three-Phase PWM: https://chat.openai.com/share/6900a303-3c33-4b63-9cd5-74ca69348
 Simulation is done using iVerilog and viewed on GTKWave.
 
 Below is the overview of the waveform as the duty cycle increases from 0% to 25%, 50%, and 75%.
-![Wave Overview](./docs/images/wave_overview.png)
+![Wave Overview](docs/images/wave_overview.png)
 
 As observed in the waveform below, when the duty cycle is set to 25%, there is a dead time of 4 clock cycles in between each transition.
-![25% Duty Cycle](./docs/images/wave_25.png)
+![25% Duty Cycle](docs/images/wave_25.png)
 
 The waveform changes when the duty cycle is adjusted.
-![75% Duty Cycle](./docs/images/wave_75.png)
+![75% Duty Cycle](docs/images/wave_75.png)
 
 The three-phase PWM with dead time is working as expected.
 
-The VCD file can also be found here: [Output Waveform](./docs/output.vcd) .
+The VCD file can also be found here: [Output Waveform](docs/output.vcd) .
 
 ## Reflection and Acknowledgement
 Despite coming from an electrical engineering background, this is the first time I went through the entire IC design RTL to GDS (and maybe to chip) flow. It has been a refreshing and exciting experience to be a small part of this movement to democratise IC design by submitting a simple design for the AI-generated Open-Source Silicon Design Challenge.
