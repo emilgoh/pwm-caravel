@@ -14,7 +14,7 @@ To develop a three-phase PWM with dead time that can be integrated as a peripher
 ## Circuit Design
 The three-phase PWM circuit is designed to generate 3 PWM waveforms with its complementary (6 PWM waveforms altogether), each 120 degrees out of phase with the others. The duty cycle of the waveforms can also be adjusted by modifying the duty cycle input signal. Dead time is also introduced such that each of the PWM waveforms will not be toggled HIGH and LOW at the same time, which could cause a short circuit. This ensures safe operation in applications such as driving motors or inverters.  
 
-![Getting Started](images/PWM.png)
+![PWM Block Diagram](images/PWM.png)
 
 The overall circuit of the three-phase PWM can be seen above.
 
@@ -62,7 +62,7 @@ The three-phase PWM design can be broken down into the following components:
 
 ## LLM Conversational Flowchart
 The conversational flow used is inspired by ChipChat and AI by AI.
-![Getting Started](images/LLMConversationalFlow.png)
+![LLM Conversation](images/LLMConversationalFlow.png)
 
 The flowchart is designed such that the user will always be in the conversation loop until the design is satisfied. Apart from the error loop, there is also an improvement loop and thus, the user will only have to use one single GPT chat session to design their desired circuit.
 
@@ -123,13 +123,13 @@ Three-Phase PWM: https://chat.openai.com/share/6900a303-3c33-4b63-9cd5-74ca69348
 Simulation is done using iVerilog and viewed on GTKWave.
 
 Below is the overview of the waveform as the duty cycle increases from 0% to 25%, 50%, and 75%.
-![Getting Started](images/wave_overview.png)
+![Wave Overview](images/wave_overview.png)
 
 As observed in the waveform below, when the duty cycle is set to 25%, there is a dead time of 4 clock cycles in between each transition.
-![Getting Started](images/wave_25.png)
+![25% Duty Cycle](images/wave_25.png)
 
 The waveform changes when the duty cycle is adjusted.
-![Getting Started](images/wave_75.png)
+![75% Duty Cycle](images/wave_75.png)
 
 The three-phase PWM with dead time is working as expected.
 
