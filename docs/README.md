@@ -107,24 +107,31 @@ The pulse width modulator should contain the following components and the respec
 > The components should be separated into different modules and later combined into a single PWM module.
 >
 
+ChatGPT was able to generate an RTL with some errors. This brings us to the error feedback loop so that ChatGPT could fix the error encountered.
+
 ### Error Feedback Loop
 A few feedbacks when faced with an error have been implemented. Firstly, the error message produced by the simulator is prompted to the GPT.
 
 An example of the “error message” feedback from the Single PWM conversation would be as such:
 >
->this is the error message:  
->.v:50: error: reg count; cannot be driven by primitives or continuous assignment.  
->pwm.v:50: error: Output port expression must support continuous assignment.  
->pwm.v:50:      : Port 3 (count) of UpCounter is connected to count  
->2 error(s) during elaboration.  
+> There is an error on line 14 in the implementation.
+>
+
+It could also be pasted directly into the prompt. Here is an example of another error message:
+>
+> this is the error message:  
+> .v:50: error: reg count; cannot be driven by primitives or continuous assignment.  
+> pwm.v:50: error: Output port expression must support continuous assignment.  
+> pwm.v:50:      : Port 3 (count) of UpCounter is connected to count  
+> 2 error(s) during elaboration.  
 >
 
 When the same error persists even after prompting the error message, the user could carry on with human feedback. An example from the Single PWM conversation will be:
 >
->There is an extra semicolon at the end of the module.
+> There is an extra semicolon at the end of the module.
 >
 
-If errors persist, the user can prompt the GPT with a sample code. This is an example from the Three-Phase PWM conversation:
+The user could also prompt ChatGPT with a sample code. This is an example from the Three-Phase PWM conversation:If errors persist, the user can prompt the GPT with a sample code. This is an example from the Three-Phase PWM conversation:
 > This is an example code of an SR latch. Can you code according to this structure and logic?
 
 ```verilog
@@ -147,6 +154,33 @@ module SR_latch(
 endmodule  
 ```
 
+By examining the logic and structure of the example code, ChatGPT would generate a code similar to the sample code, fitting it into the design.
+
+Here is a sample of the generated code by ChatGPT to be fitted into the Three-Phase PWM design:
+```verilog
+module SRLatch(
+    input wire en,
+    input wire rst,
+    input wire set,
+    input wire reset,
+    output reg q
+);
+
+    always @(*) begin
+        if (rst)
+            q <= 1'b0;
+        else if (en) begin
+            case ({set, reset})
+                2'b00 : q <= q;  // Retain previous state
+                2'b01 : q <= 1'b0;  // Reset
+                2'b10 : q <= 1'b1;  // Set
+                default: q <= 1'bx;  // Undefined state
+            endcase
+        end
+    end
+
+endmodule
+```
 
 
 ### Improvement Loop
