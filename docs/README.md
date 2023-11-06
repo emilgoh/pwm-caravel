@@ -70,11 +70,47 @@ The flowchart is designed such that the user will always be in the conversation 
 
 However, it is recommended that each circuit is broken down into smaller components and developed in separate chats. From experience, it seems that ChatGPT does not remember every single bit of the conversation, and codes that are recalled might contain errors. By breaking the circuit into smaller parts, the conversation could be more manageable and less confusing for users.
 
-In this case, two ChatGPT-4 chats were used. The first chat was used to design a single-phase PWM and the second was to improve and build on the existing single-phase PWM. Eventually, generating and developing a three-phase PWM with dead time.
+In this case, two ChatGPT-4 chats were used. The first chat was used to design a single-phase PWM and the second was to improve and build on the existing single-phase PWM. Eventually, generating and developing a three-phase PWM with dead time. The links to the conversations can be found at the bottom of this section.
 
+ChatGPT-4 with web browsing feature was used to design the three-phase PWM. This LLM was selected as it is known to be the best code generation model before fine-tuning. The web browsing feature was activated such that ChatGPT can search the web if it encounters unfamiliar prompts.
+
+### Custom Instruction and Initial Prompt
+Following ChipChat’s method of prompting ChatGPT, it is essential to tune ChatGPT such that it will respond to prompts as expected.
+
+Here is an example from the Three-Phase PWM conversation, instructing ChatGPT to respond like an IC designer in Verilog:
+
+>
+> I want you to act as an IC designer, and implement the following in Verilog.
+>
+> I am attempting to design a three-phase pulse width modulator (PWM).
+>
+
+Apart from that, the specifications of the design prompted to ChatGPT should be as detailed as possible.
+
+Here is an example from the Single PWM conversation, prompting ChatGPT to generate the RTL of a single PWM module:
+
+> I am trying to create a Verilog model for a pulse width modulator (PWM).
+The pulse width modulator should contain the following components and the respective specifications:
+> 
+> 1. Up Counter:
+> - Input: Clock, Reset
+> - 8 bits
+> - Counter should automatically reset after reaching 255
+> 2. Comparator:
+> - Input: Duty Cycle of PWM, i.e. 128/256 for 50% duty cycle
+> - Input: Output of Up Counter
+> 3. D Flip Flop:
+> - Input: Clock, Reset
+> - Input: Output of Comparator
+> - Output: PWM signal
+> 
+> The components should be separated into different modules and later combined into a single PWM module.
+>
+
+### Error Feedback Loop
 A few feedbacks when faced with an error have been implemented. Firstly, the error message produced by the simulator is prompted to the GPT.
 
-An example of the “error message” feedback would be as such:
+An example of the “error message” feedback from the Single PWM conversation would be as such:
 >
 >this is the error message:  
 >.v:50: error: reg count; cannot be driven by primitives or continuous assignment.  
@@ -83,12 +119,12 @@ An example of the “error message” feedback would be as such:
 >2 error(s) during elaboration.  
 >
 
-When the same error persists even after prompting the error message, the user could carry on with human feedback. An example will be as such:
+When the same error persists even after prompting the error message, the user could carry on with human feedback. An example from the Single PWM conversation will be:
 >
 >There is an extra semicolon at the end of the module.
 >
 
-If errors persist, the user can prompt the GPT with a sample code. An example will be:
+If errors persist, the user can prompt the GPT with a sample code. This is an example from the Three-Phase PWM conversation:
 > This is an example code of an SR latch. Can you code according to this structure and logic?
 
 ```verilog
@@ -111,9 +147,21 @@ module SR_latch(
 endmodule  
 ```
 
-ChatGPT-4 with web browsing feature was used to design the three-phase PWM. This LLM was selected as it is known to be the best code generation model before fine-tuning. The web browsing feature was activated such that ChatGPT can search the web if it encounters unfamiliar prompts.
 
-Below are the links to the conversations:
+
+### Improvement Loop
+There has to be some form of improvement which ChatGPT could do after generating an RTL which has no errors and works as expected. It could also be a feature which was missed out in the previous prompt. Thus, having this improvement loop allows the user to repeat the generation of the RTL with desired improvements implemented without human intervention.
+
+An improvement was made in the Single PWM conversation as the ENABLE signal was overlooked in the previous prompts.
+
+>
+> Can you add an 'enable' signal in the PWM module?
+> 
+
+ChatGPT was able to add the ENABLE signal to the existing code. The only downside to this is that the user has to simulate the generated code again to check for validity.
+
+### Links
+Below are the links to the conversations with ChatGPT-4:
 
 Single-Phase PWM: https://chat.openai.com/share/ff55a56d-56fa-400e-878d-bc47a241caec
 
