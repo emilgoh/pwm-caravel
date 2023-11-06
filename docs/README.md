@@ -2,19 +2,19 @@
 Author: Emil Goh
 
 ## Background
-Three-phase PWM is a crucial technique to enable efficient and precise control of electrical energy in various applications and is fundamental in driving motors and managing power systems to facilitate a smooth conversion of electrical energy.
+Three-phase PWM is a crucial technique to enable efficient and precise control of electrical energy in various applications. It is fundamental in driving motors and managing power systems to facilitate a smooth conversion of electrical energy. A three-phase PWM is especially important to control brushless DC motors.
 
-As the world's demand for automation through robots and drones, and renewable energy systems, such as solar inverters and wind turbines, increases rapidly, it has made the integration of this technique even more important.  
+As the world's demand for automation through robots and drones and renewable energy systems such as solar inverters and wind turbines, increases rapidly, the integration of this technique in chips even more important. 
 
 The design has also incorporated dead time which is essential in preventing short circuits, enhancing safety and reliability of the power electronic system.
 
 Learn more: [Basics of PWM](pwm_basics.md)
 
 ## Objective
-To develop a three-phase PWM with dead time that can be integrated as a peripheral in the Caravel harness to control electrical energy for various power electronic systems, using ChatGPT-4 to write the RTL of the design.
+To develop a three-phase PWM with dead time that can be integrated as a peripheral in the Caravel harness to control electrical energy for various power electronic systems, using ChatGPT-4 to geerate the RTL of the design.
 
 ## Circuit Design
-The three-phase PWM circuit is designed to generate 3 PWM waveforms with its complementary (6 PWM waveforms altogether), each 120 degrees out of phase with the others. The duty cycle of the waveforms can also be adjusted by modifying the duty cycle input signal. Dead time is also introduced such that each of the PWM waveforms will not be toggled HIGH and LOW at the same time, which could cause a short circuit. This ensures safe operation in applications when driving power electronics.   
+The three-phase PWM circuit is designed to generate 3 PWM waveforms with its complementary (6 PWM waveforms altogether), each 120 degrees out of phase with the others. The duty cycle of the waveforms can also be adjusted by modifying the duty cycle input signal. Dead time is also introduced such that each of the PWM waveforms will not be toggled HIGH and LOW simultaneously, which could cause a short circuit. This ensures safe operation in applications when driving power electronics.    
 
 ![PWM Block Diagram](images/PWM.png)
 
@@ -48,7 +48,7 @@ The three-phase PWM design can be broken down into the following components:
     
     The dead time generator output is produced by inputting the PWM waveform from each PWM module and the delayed PWM waveform. It introduces a short delay between the turn-on and off times of the PWM signals to prevent overlaps.
 
-### Dead Time Generator Operation Logic
+    More information on the implemented Dead Time Generator: [Dead Time Generator Operation](deadtimegenerator.md)
 
 ### Pin-out
 | PWM           | Caravel  | GPIO    | Type   |
@@ -70,9 +70,9 @@ The conversational flow used is inspired by ChipChat and AI by AI.
 
 The flowchart is designed such that the user will always be in the conversation loop until the design is satisfied. Apart from the error loop, there is also an improvement loop and thus, the user will only have to use one single GPT chat session to design their desired circuit.
 
-However, it is recommended that each circuit is broken down into smaller components and developed in separate chats. From experience, it seems that ChatGPT does not remember every single bit of the conversation, and codes that are recalled might contain errors. By breaking the circuit down into smaller parts, the conversation could be more manageable and less confusing for users.
+However, it is recommended that each circuit is broken down into smaller components and developed in separate chats. From experience, it seems that ChatGPT does not remember every single bit of the conversation, and codes that are recalled might contain errors. By breaking the circuit into smaller parts, the conversation could be more manageable and less confusing for users.
 
-In this case, two ChatGPT-4 chats were used for easier reference in the future. The first chat was used to design a single-phase PWM and the second was used to improve and build on the existing single-phase PWM to generate a three-phase PWM with dead time.
+In this case, two ChatGPT-4 chats were used. The first chat was used to design a single-phase PWM and the second was to improve and build on the existing single-phase PWM. Eventually, generating and developing a three-phase PWM with dead time.
 
 A few feedbacks when faced with an error have been implemented. Firstly, the error message produced by the simulator is prompted to the GPT.
 
@@ -115,7 +115,7 @@ endmodule
 
 ChatGPT-4 with web browsing feature was used to design the three-phase PWM. This LLM was selected as it is known to be the best code generation model before fine-tuning. The web browsing feature was activated such that ChatGPT can search the web if it encounters unfamiliar prompts.
 
-Below is the link to the conversations:
+Below are the links to the conversations:
 
 Single-Phase PWM: https://chat.openai.com/share/ff55a56d-56fa-400e-878d-bc47a241caec
 
@@ -136,6 +136,10 @@ The waveform changes when the duty cycle is adjusted.
 The three-phase PWM with dead time is working as expected.
 
 The VCD file can also be found here: [Output Waveform](output.vcd) .
+
+## Conclusion
+The design generates 3 PWM with 3 complement signals, with a dead time of 4 clock cycles.
+It also passes the MPW precheck and tape-out processes on the Efabless platform with no error.
 
 ## Reflection and Acknowledgement
 Despite coming from an electrical engineering background, this is the first time I went through the entire IC design RTL to GDS (and maybe to chip) flow. It has been a refreshing and exciting experience to be a small part of this movement to democratise IC design by submitting a simple design for the AI-generated Open-Source Silicon Design Challenge.
