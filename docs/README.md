@@ -46,7 +46,7 @@ The three-phase PWM design can be broken down into the following components:
     
     The dead time generator output is produced by inputting the PWM waveform from each PWM module and the delayed PWM waveform. It introduces a short delay between the turn-on and off times of the PWM signals to prevent overlaps.
 
-    More information on the implemented Dead Time Generator: [Dead Time Generator Operation](deadtimegenerator.md)
+    More information on how the implemented Dead Time Generator works: [Dead Time Generator Operation](deadtimegenerator.md)
 
 ### Pin-out
 | PWM           | Caravel  | GPIO    | Type   |
