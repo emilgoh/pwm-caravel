@@ -8,11 +8,13 @@ As the world's demand for automation through robots and drones, and renewable en
 
 The design has also incorporated dead time which is essential in preventing short circuits, enhancing safety and reliability of the power electronic system.
 
+Learn more: [Basics of PWM](pwm_basics.md)
+
 ## Objective
 To develop a three-phase PWM with dead time that can be integrated as a peripheral in the Caravel harness to control electrical energy for various power electronic systems, using ChatGPT-4 to write the RTL of the design.
 
 ## Circuit Design
-The three-phase PWM circuit is designed to generate 3 PWM waveforms with its complementary (6 PWM waveforms altogether), each 120 degrees out of phase with the others. The duty cycle of the waveforms can also be adjusted by modifying the duty cycle input signal. Dead time is also introduced such that each of the PWM waveforms will not be toggled HIGH and LOW at the same time, which could cause a short circuit. This ensures safe operation in applications such as driving motors or inverters.  
+The three-phase PWM circuit is designed to generate 3 PWM waveforms with its complementary (6 PWM waveforms altogether), each 120 degrees out of phase with the others. The duty cycle of the waveforms can also be adjusted by modifying the duty cycle input signal. Dead time is also introduced such that each of the PWM waveforms will not be toggled HIGH and LOW at the same time, which could cause a short circuit. This ensures safe operation in applications when driving power electronics.   
 
 ![PWM Block Diagram](images/PWM.png)
 
@@ -39,12 +41,14 @@ The three-phase PWM design can be broken down into the following components:
     
     The signal from the S-R latch is connected to the ENABLE input of the PWM. This results in the counter of the following PWM being activated, only when the previous counter reaches 33.3% of its resolution and produces a second PWM waveform with a 120-degree phase difference. This logic is applied to the third PWM.
     
-4. **3 Dead TIme Generators, each consisting of the following:**
+4. **3 Dead Time Generators, each consisting of the following:**
     1. Shift Register (4 DFF cascaded together): delays each PWM output by 4 clock cycles
     2. AND gate: Produces the main PWM output
     3. NOR gate: Produces the complementary PWM output
     
     The dead time generator output is produced by inputting the PWM waveform from each PWM module and the delayed PWM waveform. It introduces a short delay between the turn-on and off times of the PWM signals to prevent overlaps.
+
+### Dead Time Generator Operation Logic
 
 ### Pin-out
 | PWM           | Caravel  | GPIO    | Type   |
@@ -66,13 +70,11 @@ The conversational flow used is inspired by ChipChat and AI by AI.
 
 The flowchart is designed such that the user will always be in the conversation loop until the design is satisfied. Apart from the error loop, there is also an improvement loop and thus, the user will only have to use one single GPT chat session to design their desired circuit.
 
+However, it is recommended that each circuit is broken down into smaller components and developed in separate chats. From experience, it seems that ChatGPT does not remember every single bit of the conversation, and codes that are recalled might contain errors. By breaking the circuit down into smaller parts, the conversation could be more manageable and less confusing for users.
+
 In this case, two ChatGPT-4 chats were used for easier reference in the future. The first chat was used to design a single-phase PWM and the second was used to improve and build on the existing single-phase PWM to generate a three-phase PWM with dead time.
 
-A few feedbacks when faced with an error have been implemented. Firstly, the error message produced by the simulator is prompted to the GPT.The flowchart is designed such that the user will always be in the conversation loop until the design is satisfied. Apart from the error loop, there is also an improvement loop and thus, the user will only have to use one single GPT chat session to design their desired circuit.
-
-In the error loop, the LLM is 
-
-ChatGPT-4 with web browsing feature was used to design the three-phase PWM. This LLM was selected as it is known to be the best code generation model before fine-tuning. The web browsing feature was activated such that ChatGPT can search the web if it encounters unfamiliar prompts.
+A few feedbacks when faced with an error have been implemented. Firstly, the error message produced by the simulator is prompted to the GPT.
 
 An example of the “error message” feedback would be as such:
 >
