@@ -8,15 +8,13 @@ As the world's demand for automation through robots and drones and renewable ene
 
 The design has also incorporated dead time which is essential in preventing short circuits, enhancing safety and reliability of the power electronic system.
 
-Learn more: [Basics of PWM](pwm_basics.md)
-
 ## Objective
-To develop a three-phase PWM with dead time that can be integrated as a peripheral in the Caravel harness to control electrical energy for various power electronic systems, using ChatGPT-4 to geerate the RTL of the design.
+To develop a three-phase PWM with dead time that can be integrated as a peripheral in the Caravel harness to control electrical energy for various power electronic systems, using ChatGPT-4 to generate the RTL of the design.
 
 ## Circuit Design
-The three-phase PWM circuit is designed to generate 3 PWM waveforms with its complementary (6 PWM waveforms altogether), each 120 degrees out of phase with the others. The duty cycle of the waveforms can also be adjusted by modifying the duty cycle input signal. Dead time is also introduced such that each of the PWM waveforms will not be toggled HIGH and LOW simultaneously, which could cause a short circuit. This ensures safe operation in applications when driving power electronics.    
+The three-phase PWM circuit is designed to generate 3 PWM waveforms with its complementary signal (6 PWM waveforms altogether), each 120 degrees out of phase with the others. The duty cycle of the waveforms can also be adjusted by modifying the duty cycle input signal. Dead time is also introduced such that each of the PWM waveforms will not be toggled HIGH and LOW simultaneously, which could cause a short circuit. This ensures safe operation in applications when driving power electronics.    
 
-![PWM Block Diagram](images/PWM.png)
+![PWM Block Diagram](images/PWM_bold.png)
 
 The overall circuit of the three-phase PWM can be seen above.
 
@@ -66,7 +64,7 @@ The three-phase PWM design can be broken down into the following components:
 
 ## LLM Conversational Flowchart
 The conversational flow used is inspired by ChipChat and AI by AI.
-![LLM Conversation](images/LLMConversationalFlow.png)
+![LLM Conversation](images/LLMConversationalFlow_bold.png)
 
 The flowchart is designed such that the user will always be in the conversation loop until the design is satisfied. Apart from the error loop, there is also an improvement loop and thus, the user will only have to use one single GPT chat session to design their desired circuit.
 
