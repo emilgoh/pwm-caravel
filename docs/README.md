@@ -1,4 +1,4 @@
-# Three Phase Pulse Width Modulator (PWM) with Dead Time
+# Three-Phase Pulse Width Modulator (PWM) with Dead Time
 Author: Emil Goh
 
 ## Background
