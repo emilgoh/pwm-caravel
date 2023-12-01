@@ -224,8 +224,7 @@ It also passes the MPW precheck and tape-out processes on the Efabless platform 
 ## Reflection and Acknowledgement
 Despite coming from an electrical engineering background, this is the first time I went through the entire IC design RTL to GDS (and maybe to chip) flow. It has been a refreshing and exciting experience to be a small part of this movement to democratise IC design by submitting a simple design for the AI-generated Open-Source Silicon Design Challenge.
 
-I would like to use this opportunity to thank my mentor, Dr Teo Tee Hui, and Mr Xiang Mao Yang from the Singapore University of Technology and Design (SUTD) for their unwavering support and guidance. Also, a big thank you to the Efabless team who has made all these possible.
-
+I would like to use this opportunity to thank my mentors, Dr Teo Tee Hui from the Singapore University of Technology and Design (SUTD), Dr Wey I-Chyn from Chang Gung University (CGU) in Taiwan, and Mr Xiang Mao Yang from SUTD for their unwavering support and guidance. Also, a big thank you to the Efabless team who has made all these possible.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![UPRJ_CI](https://github.com/efabless/caravel_project_example/actions/workflows/user_project_ci.yml/badge.svg)](https://github.com/efabless/caravel_project_example/actions/workflows/user_project_ci.yml) [![Caravel Build](https://github.com/efabless/caravel_project_example/actions/workflows/caravel_build.yml/badge.svg)](https://github.com/efabless/caravel_project_example/actions/workflows/caravel_build.yml)
 
